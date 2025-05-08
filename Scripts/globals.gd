@@ -1,0 +1,5 @@
+class_name GLOBALS 
+
+enum PIECE {UNSET, F, I, L, N, P, T, U, V, W, X, Y, Z}
+
+const MIRRORABLE_PIECES := [PIECE.F, PIECE.L, PIECE.N, PIECE.P, PIECE.Y, PIECE.Z]

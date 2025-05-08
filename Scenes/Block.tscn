@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://xlbwdl1gp4j0"]
+
+[ext_resource type="Texture2D" uid="uid://c7pedhisoos7d" path="res://Assets/Sprite.png" id="1_2wby2"]
+
+[node name="Block" type="Sprite2D"]
+texture = ExtResource("1_2wby2")
+centered = false
