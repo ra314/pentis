@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpnx5rtsadrmd"]
+
+[ext_resource type="Texture2D" uid="uid://cqx2eufd52jou" path="res://icon.svg" id="1_ml4tp"]
+
+[node name="Board" type="Node2D"]
+
+[node name="Pieces" type="Node" parent="."]
+
+[node name="Wall" type="Node" parent="."]
+
+[node name="Left" type="Sprite2D" parent="Wall"]
+scale = Vector2(0.25, 5)
+texture = ExtResource("1_ml4tp")
+centered = false
+
+[node name="Right" type="Sprite2D" parent="Wall"]
+position = Vector2(352, 0)
+scale = Vector2(0.25, 5)
+texture = ExtResource("1_ml4tp")
+centered = false
+
+[node name="Bottom" type="Sprite2D" parent="Wall"]
+position = Vector2(0, 640)
+scale = Vector2(3, 0.25)
+texture = ExtResource("1_ml4tp")
+centered = false
