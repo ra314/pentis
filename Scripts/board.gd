@@ -2,21 +2,18 @@ extends Node2D
 
 class_name Board
 
-static var NUM_ROWS = 20
-static var NUM_COLS = 10
-
 static func create() -> Board:
 	var board := Board.new()
 
 	# Setup the board with null representing no color/piece.
 	var c: Array[Array] = board.colors
 	c = []
-	c.resize(NUM_ROWS)
+	c.resize(GLOBALS.BOARD_ROWS)
 
-	for i in range(NUM_ROWS):
+	for i in range(GLOBALS.BOARD_ROWS):
 		c[i] = []
-		c[i].resize(NUM_COLS)
-		for j in range(NUM_COLS):
+		c[i].resize(GLOBALS.BOARD_COLS)
+		for j in range(GLOBALS.BOARD_COLS):
 			c[i][j] = null
 
 	return board

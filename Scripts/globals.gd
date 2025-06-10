@@ -6,6 +6,10 @@ const MIRRORABLE_PIECES := [PIECE.F, PIECE.L, PIECE.N, PIECE.P, PIECE.Y, PIECE.Z
 
 enum ROTATION {ROT0, ROT90, ROT180, ROT270}
 
+# Board Dimensions
+const BOARD_ROWS = 20
+const BOARD_COLS = 10
+
 static func pivot(rot: ROTATION, clockwise: bool) -> ROTATION:
 	var next_rot := rot
 	if clockwise:
