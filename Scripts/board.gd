@@ -24,10 +24,18 @@ func addPiece(piece: Piece):
 	current_piece = piece
 	return null
 
-func drop():
-	# Check if there are any collisions below
-	
-	return 
+func stop_drop() -> void:
+	current_piece.undrop()
+	current_piece = null
+
+# Check if there are any collisions below.
+func drop() -> void:
+	current_piece.drop()
+	for vec in current_piece.get_vectors():
+		if vec.y >= GLOBALS.BOARD_ROWS:
+			return stop_drop()
+		if colors[vec.y][vec.x] != Color.BLACK:
+			return stop_drop()
 
 # Colors has type Array[Array[Color]]
 var colors: Array[Array]
