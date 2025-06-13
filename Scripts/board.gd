@@ -25,6 +25,8 @@ func addPiece(piece: Piece):
 	return null
 
 func drop():
+	# Check if there are any collisions below
+	
 	return 
 
 # Colors has type Array[Array[Color]]

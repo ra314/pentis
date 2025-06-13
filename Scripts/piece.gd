@@ -10,6 +10,9 @@ func pivot(clockwise: bool) -> void:
 	# TODO
 	# Apply rotation to board state, fail if not possible.
 
+func get_vectors() -> Array[Vector2i]:
+	return Numpy.add(Pentominos.parse_piece(Pentominos.PIECES[piece_enum][rot]), cur_pos)
+
 var cur_pos := Vector2i()
 var rot := GLOBALS.ROTATION.ROT0
 var is_mirrored := false
