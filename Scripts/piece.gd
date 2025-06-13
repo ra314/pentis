@@ -3,6 +3,7 @@ extends Node2D
 class_name Piece
 
 static func create(piece_enum: GLOBALS.PIECE, is_mirrored: bool) -> Piece:
+	Piece.color = null
 	return null
 
 func pivot(clockwise: bool) -> void:
@@ -17,3 +18,4 @@ var cur_pos := Vector2i()
 var rot := GLOBALS.ROTATION.ROT0
 var is_mirrored := false
 var piece_enum: GLOBALS.PIECE
+var color: Color

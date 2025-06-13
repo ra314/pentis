@@ -22,7 +22,14 @@ static func create() -> Board:
 
 func addPiece(piece: Piece):
 	current_piece = piece
-	return null
+
+func clearPiece():
+	for vec in range(current_piece.getVectors()):
+		board.colors[vec.x][vec.y] = null
+
+func drawPiece():
+	for vec in range(current_piece.getVectors()):
+		board.colors[vec.x][vec.y] = current_piece.color
 
 func drop():
 	# Check if there are any collisions below
