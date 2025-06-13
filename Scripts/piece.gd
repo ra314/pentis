@@ -14,6 +14,12 @@ func pivot(clockwise: bool) -> void:
 func get_vectors() -> Array[Vector2i]:
 	return Numpy.add(Pentominos.parse_piece(Pentominos.PIECES[piece_enum][rot]), cur_pos)
 
+func drop() -> void:
+	cur_pos += Vector2i(0, 1)
+
+func undrop() -> void:
+	cur_pos += Vector2i(0, -1)
+
 var cur_pos := Vector2i()
 var rot := GLOBALS.ROTATION.ROT0
 var is_mirrored := false
