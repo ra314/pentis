@@ -2,9 +2,17 @@ extends Node2D
 
 class_name Piece
 
+var cur_pos := Vector2i()
+var rot := GLOBALS.ROTATION.ROT0
+var is_mirrored := false
+var piece_enum: GLOBALS.PIECE
+var color: Color
+
 static func create(piece_enum: GLOBALS.PIECE, is_mirrored: bool) -> Piece:
-	Piece.color = null
-	return null
+	var piece = Piece.new()
+	# TODO - fetch the color from Pentominos.
+	piece.color = Color.RED
+	return piece
 
 func pivot(clockwise: bool) -> void:
 	rot = GLOBALS.pivot(rot, clockwise)
@@ -19,9 +27,3 @@ func drop() -> void:
 
 func undrop() -> void:
 	cur_pos += Vector2i(0, -1)
-
-var cur_pos := Vector2i()
-var rot := GLOBALS.ROTATION.ROT0
-var is_mirrored := false
-var piece_enum: GLOBALS.PIECE
-var color: Color

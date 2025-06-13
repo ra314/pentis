@@ -3,6 +3,8 @@ extends Node2D
 class_name Board
 
 var current_piece: Piece
+# Colors has type Array[Array[Color]]
+var colors: Array[Array]
 
 static func create() -> Board:
 	var board := Board.new()
@@ -20,16 +22,16 @@ static func create() -> Board:
 
 	return board
 
-func addPiece(piece: Piece):
+func addPiece(piece: Piece) -> void:
 	current_piece = piece
 
-func clearPiece():
-	for vec in range(current_piece.getVectors()):
-		board.colors[vec.x][vec.y] = null
+func clearPiece() -> void:
+	for vec in current_piece.getVectors():
+		colors[vec.x][vec.y] = null
 
-func drawPiece():
-	for vec in range(current_piece.getVectors()):
-		board.colors[vec.x][vec.y] = current_piece.color
+func drawPiece() -> void:
+	for vec in current_piece.getVectors():
+		colors[vec.x][vec.y] = current_piece.color
 
 func stop_drop() -> void:
 	current_piece.undrop()
@@ -43,6 +45,3 @@ func drop() -> void:
 			return stop_drop()
 		if colors[vec.y][vec.x] != Color.BLACK:
 			return stop_drop()
-
-# Colors has type Array[Array[Color]]
-var colors: Array[Array]
