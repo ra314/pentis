@@ -2,6 +2,8 @@ extends Node2D
 
 class_name Board
 
+var current_piece: Piece
+
 static func create() -> Board:
 	var board := Board.new()
 
@@ -19,10 +21,11 @@ static func create() -> Board:
 	return board
 
 func addPiece(piece: Piece):
+	current_piece = piece
 	return null
 
 func drop():
-	return null
+	return 
 
 # Colors has type Array[Array[Color]]
 var colors: Array[Array]
