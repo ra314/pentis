@@ -8,3 +8,8 @@ tmp/*
 
 # Ignore releases
 Releases/
+
+# Rust
+pentomino_game/src/Cargo.lock
+pentomino_game/src/MODULE.bazel.lock
+pentomino_game/target/*
