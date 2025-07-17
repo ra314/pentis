@@ -81,7 +81,7 @@ pub struct Vector2i {
     pub y: i32,
 }
 
-impl Vector2i { 
+impl Vector2i {
     pub fn new(x: i32, y: i32) -> Self {
         Self { x, y }
     }
@@ -286,11 +286,26 @@ impl Board {
     
     pub fn display(&self) {
         println!("\n=== BOARD ===");
-        for row in &self.colors {
+        
+        // Create a temporary display board that includes the current piece
+        let mut display_board = self.colors.clone();
+        
+        // If there's a current piece, overlay it on the display
+        if let Some(ref piece) = self.current_piece {
+            for vec in piece.get_vectors() {
+                if vec.y >= 0 && vec.x >= 0 && 
+                   vec.y < BOARD_ROWS as i32 && vec.x < BOARD_COLS as i32 {
+                    display_board[vec.y as usize][vec.x as usize] = Some(Color::Red);
+                }
+            }
+        }
+        
+        // Display the board with the current piece
+        for row in display_board {
             for cell in row {
                 match cell {
-                    Some(Color::Black) => print!("█"),
-                    Some(Color::Red) => print!("R"),
+                    Some(Color::Black) => print!("B"),
+                    Some(Color::Red) => print!("R"),  // Current piece
                     Some(Color::Green) => print!("G"),
                     Some(Color::Blue) => print!("B"),
                     Some(Color::Yellow) => print!("Y"),
