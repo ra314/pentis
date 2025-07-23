@@ -2,6 +2,10 @@
 // PENTOMINOS MODULE
 // ============================================================================
 
+use std::collections::HashMap;
+
+use crate::{globals::{PieceType, Rotation}, vector::Vector2i};
+
 pub fn parse_piece(raw_piece: &str) -> Vec<Vector2i> {
     let mut ret = Vec::new();
     let mut y = 0;

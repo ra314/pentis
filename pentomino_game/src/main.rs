@@ -1,7 +1,12 @@
-// ============================================================================
-// MAIN - DEMO/TEST
-// ============================================================================
+mod board;
+mod globals;
+mod piece;
+mod vector;
+mod pentominos;
+#[cfg(test)]
+mod tests;
 
+use crate::{board::Board, globals::PieceType, piece::Piece};
 fn main() {
     println!("Pentomino Game - Rust Version");
     

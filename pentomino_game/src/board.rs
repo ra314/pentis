@@ -1,6 +1,4 @@
-// ============================================================================
-// BOARD STRUCT
-// ============================================================================
+use crate::{globals::{BOARD_COLS, BOARD_ROWS}, piece::Piece};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Color {
@@ -25,7 +23,7 @@ impl Board {
         colors.resize(BOARD_ROWS, Vec::new());
         
         for i in 0..BOARD_ROWS {
-            colors[i].resize(BOARD_COLS, None);
+            colors[i].resize(BOARD_ROWS, None);
         }
         
         Self {

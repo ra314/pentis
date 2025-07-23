@@ -2,6 +2,10 @@
 // PIECE STRUCT
 // ============================================================================
 
+use std::collections::HashMap;
+
+use crate::{globals::{PieceType, Rotation}, vector::Vector2i};
+
 pub struct Piece {
     pub cur_pos: Vector2i,
     pub rot: Rotation,
@@ -17,20 +21,22 @@ impl Piece {
             rot: Rotation::Rot0,
             is_mirrored,
             piece_enum,
-            pieces_data: get_pieces(),
+            pieces_data: crate::pentominos::get_pieces(),
         }
     }
     
     pub fn pivot(&mut self, clockwise: bool) {
-        self.rot = pivot(self.rot, clockwise);
+        self.rot = crate::globals::pivot(self.rot, clockwise);
         // TODO: Apply rotation to board state, fail if not possible.
     }
     
     pub fn get_vectors(&self) -> Vec<Vector2i> {
         if let Some(piece_rotations) = self.pieces_data.get(&self.piece_enum) {
             if let Some(piece_data) = piece_rotations.get(&self.rot) {
-                let parsed = parse_piece(piece_data);
-                return add_vectors(&parsed, self.cur_pos);
+                let parsed = crate::pentominos::parse_piece(piece_data);
+                return parsed.iter()
+                    .map(|vec| *vec + self.cur_pos)
+                    .collect();
             }
         }
         Vec::new()

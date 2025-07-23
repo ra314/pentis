@@ -1,7 +1,7 @@
 #[cfg(test)]
 mod tests {
-    use super::*;
-    
+    use crate::{board::Board, globals::{pivot, PieceType, Rotation, BOARD_COLS, BOARD_ROWS}, piece::Piece, vector::Vector2i};
+
     #[test]
     fn test_board_creation() {
         let board = Board::create();
