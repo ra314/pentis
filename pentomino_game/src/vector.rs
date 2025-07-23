@@ -12,7 +12,7 @@ impl Vector2i {
     pub fn new(x: i32, y: i32) -> Self {
         Self { x, y }
     }
-    
+
     pub fn zero() -> Self {
         Self { x: 0, y: 0 }
     }
@@ -20,7 +20,7 @@ impl Vector2i {
 
 impl std::ops::Add for Vector2i {
     type Output = Vector2i;
-    
+
     fn add(self, rhs: Vector2i) -> Vector2i {
         Vector2i {
             x: self.x + rhs.x,

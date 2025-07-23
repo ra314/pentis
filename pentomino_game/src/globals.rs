@@ -38,7 +38,12 @@ pub enum Rotation {
 
 impl Rotation {
     pub fn values() -> [Rotation; 4] {
-        [Rotation::Rot0, Rotation::Rot90, Rotation::Rot180, Rotation::Rot270]
+        [
+            Rotation::Rot0,
+            Rotation::Rot90,
+            Rotation::Rot180,
+            Rotation::Rot270,
+        ]
     }
 }
 
@@ -49,12 +54,12 @@ pub const BOARD_COLS: usize = 10;
 pub fn pivot(rot: Rotation, clockwise: bool) -> Rotation {
     let rotations = Rotation::values();
     let current_index = rotations.iter().position(|&r| r == rot).unwrap();
-    
+
     let next_index = if clockwise {
         (current_index + 1) % rotations.len()
     } else {
         (current_index + rotations.len() - 1) % rotations.len()
     };
-    
+
     rotations[next_index]
 }

@@ -4,7 +4,8 @@
 
 use std::collections::HashMap;
 
-use crate::{globals::{PieceType, Rotation}, vector::Vector2i};
+use crate::globals::{PieceType, Rotation};
+use crate::vector::Vector2i;
 
 pub struct Piece {
     pub cur_pos: Vector2i,
@@ -24,28 +25,26 @@ impl Piece {
             pieces_data: crate::pentominos::get_pieces(),
         }
     }
-    
+
     pub fn pivot(&mut self, clockwise: bool) {
         self.rot = crate::globals::pivot(self.rot, clockwise);
         // TODO: Apply rotation to board state, fail if not possible.
     }
-    
+
     pub fn get_vectors(&self) -> Vec<Vector2i> {
         if let Some(piece_rotations) = self.pieces_data.get(&self.piece_enum) {
             if let Some(piece_data) = piece_rotations.get(&self.rot) {
                 let parsed = crate::pentominos::parse_piece(piece_data);
-                return parsed.iter()
-                    .map(|vec| *vec + self.cur_pos)
-                    .collect();
+                return parsed.iter().map(|vec| *vec + self.cur_pos).collect();
             }
         }
         Vec::new()
     }
-    
+
     pub fn drop(&mut self) {
         self.cur_pos += Vector2i::new(0, 1);
     }
-    
+
     pub fn undrop(&mut self) {
         self.cur_pos += Vector2i::new(0, -1);
     }
