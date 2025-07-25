@@ -4,7 +4,7 @@
 
 use std::collections::HashMap;
 
-use crate::globals::{PieceType, Rotation};
+use crate::globals::PieceType;
 use crate::vector::Vector2i;
 
 pub fn parse_piece(raw_piece: &str) -> Vec<Vector2i> {
@@ -25,32 +25,45 @@ pub fn parse_piece(raw_piece: &str) -> Vec<Vector2i> {
     ret
 }
 
-pub fn get_pieces() -> HashMap<PieceType, HashMap<Rotation, &'static str>> {
+pub fn get_pieces() -> HashMap<PieceType, [Vec<Vector2i>; 4]> {
+    use std::fs;
+    use std::path::Path;
+
     let mut pieces = HashMap::new();
 
-    // F piece
-    let mut f_piece = HashMap::new();
-    f_piece.insert(Rotation::Rot0, ".00\n00.\n.0.");
-    f_piece.insert(Rotation::Rot90, ".0.\n000\n..0");
-    f_piece.insert(Rotation::Rot180, ".0.\n.00\n00.");
-    f_piece.insert(Rotation::Rot270, "0..\n000\n.0.");
-    pieces.insert(PieceType::F, f_piece);
+    // Read the pentominos.txt file
+    let txt_path = Path::new("src/pentominos.txt");
+    let txt = fs::read_to_string(txt_path).expect("Failed to read pentominos.txt");
 
-    // I piece
-    let mut i_piece = HashMap::new();
-    i_piece.insert(Rotation::Rot0, ".0.\n.0.\n.0.\n.0.\n.0.");
-    i_piece.insert(Rotation::Rot90, ".....\n00000\n.....");
-    i_piece.insert(Rotation::Rot180, ".0.\n.0.\n.0.\n.0.\n.0.");
-    i_piece.insert(Rotation::Rot270, ".....\n00000\n.....");
-    pieces.insert(PieceType::I, i_piece);
-
-    // L piece
-    let mut l_piece = HashMap::new();
-    l_piece.insert(Rotation::Rot0, ".0..\n.0..\n.0..\n.00.");
-    l_piece.insert(Rotation::Rot90, "....\n0000\n0...\n....");
-    l_piece.insert(Rotation::Rot180, ".00.\n..0.\n..0.\n..0.");
-    l_piece.insert(Rotation::Rot270, "....\n...0\n0000\n....");
-    pieces.insert(PieceType::L, l_piece);
+    // Split by piece type (lines with only one character)
+    let pieces = txt.split_terminator("\n----------\n");
+    let mut lines = txt.lines().peekable();
+    while let Some(line) = lines.next() {
+        let line = line.trim();
+        if line.is_empty() { continue; }
+        // Piece type line (e.g., "F", "I", "L")
+        if line.len() == 1 {
+            let piece_type = PieceType::from_str(line).expect("Invalid PieceType in pentominos.txt");
+            let mut rotations = Vec::new();
+            // Collect next 4 blocks (each block separated by empty line)
+            for _ in 0..4 {
+                let mut block = String::new();
+                while let Some(&next_line) = lines.peek() {
+                    if next_line.trim().is_empty() {
+                        lines.next();
+                        break;
+                    }
+                    block.push_str(next_line);
+                    block.push('\n');
+                    lines.next();
+                }
+                rotations.push(parse_piece(block.trim_end()));
+            }
+            // Ensure 4 rotations
+            assert_eq!(rotations.len(), 4, "Each piece must have 4 rotations");
+            pieces.insert(piece_type, [rotations[0].clone(), rotations[1].clone(), rotations[2].clone(), rotations[3].clone()]);
+        }
+    }
 
     pieces
 }
