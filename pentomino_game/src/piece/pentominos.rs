@@ -5,7 +5,7 @@
 use std::collections::HashMap;
 
 use crate::globals::PieceType;
-use crate::vector::Vector2i;
+use crate::utils::vector::Vector2i;
 
 pub fn parse_piece(raw_piece: &str) -> Vec<Vector2i> {
     let mut ret = Vec::new();

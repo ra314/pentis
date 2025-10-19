@@ -4,7 +4,7 @@ mod pentominos;
 mod piece;
 #[cfg(test)]
 mod tests;
-mod vector;
+mod utils;
 
 use crate::board::Board;
 use crate::globals::PieceType;

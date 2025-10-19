@@ -1,6 +1,5 @@
-// ============================================================================
-// VECTOR2I (Position)
-// ============================================================================
+// Represents a 2D integer vector for convenient cartesian coordinate operations.
+// Provides methods and trait implementations for basic vector arithmetic and manipulation.
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Vector2i {
@@ -20,7 +19,6 @@ impl Vector2i {
 
 impl std::ops::Add for Vector2i {
     type Output = Vector2i;
-
     fn add(self, rhs: Vector2i) -> Vector2i {
         Vector2i {
             x: self.x + rhs.x,
